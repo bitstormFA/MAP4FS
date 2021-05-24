@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="Utils.fs" />
+        <Compile Include="MHFP.fs" />
+        <Compile Include="MAP4.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="NumpyDotNet" Version="0.9.74" />
+      <PackageReference Include="RDKitDotNetCore" Version="2021.5.0-master.alpha0" />
+    </ItemGroup>
+
+</Project>
