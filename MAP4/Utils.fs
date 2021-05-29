@@ -8,7 +8,10 @@ open NumpyDotNet
 open FSharp.Collections
 module Utils =
     type Smiles = string
-    
+    type FP =
+    | Folded of ndarray
+    | Unfolded of ndarray
+
     let sha1 = HashAlgorithm.Create("SHA1")
 
     let encoding = System.Text.UTF8Encoding()

@@ -7,10 +7,6 @@ open MAP4.MHFP
 open NumpyDotNet
 open Utils
 
-type FP =
-    | Folded of ndarray
-    | Unfolded of ndarray
-
 type MAP4Calculator(?dimensions:int, ?radius:int, ?isCounted:bool, ?returnString:bool) =
     member _.dimensions = defaultArg dimensions 1024
     member _.radius = defaultArg radius 2
