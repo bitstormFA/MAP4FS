@@ -4,6 +4,7 @@ open GraphMolWrap
 open NUnit.Framework
 open MAP4
 open MAP4.MHFP
+open MAP4.LSHForest
 open Utils
 open NumpyDotNet
 
@@ -117,6 +118,12 @@ let TestMAP4() =
     Assert.AreEqual(distFoldedAB, 0.0166015625)
     Assert.AreEqual(distAB, distBA, 0.001)
     Assert.AreEqual(distFoldedAB, distFoldedBA)
+    
+[<Test>]
+let TestLSHForest() =
+    let lf = LSHForest()
+    
+    Assert.IsTrue(true)
 
     
     
