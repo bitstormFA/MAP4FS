@@ -135,7 +135,7 @@ module MHFP =
         }
         
     let secfpFromSmilesDefault smiles =
-        secfpFromSmiles smiles 2048 3 true 1 true
+        secfpFromSmiles smiles 2048 3 true 1 false
 
     let distance (a: ndarray) (b: ndarray) =
         let length = int a.shape.iDims.[0]

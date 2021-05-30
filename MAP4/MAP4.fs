@@ -4,7 +4,6 @@ open System.Collections.Generic
 open GraphMolWrap
 open MAP4
 open MAP4.MHFP
-open NumpyDotNet
 open Utils
 
 type MAP4Calculator(?dimensions:int, ?radius:int, ?isCounted:bool, ?returnString:bool) =
