@@ -27,7 +27,7 @@ type MAP4Calculator(?dimensions:int, ?radius:int, ?isCounted:bool, ?returnString
         for ids in (comb 2 [0..numAtoms-1]) do
             let idx1 = ids.[0]
             let idx2 = ids.[1]
-            let dist = int(distanceMatrix.[idx1, idx2]).ToString()
+            let dist = int(distanceMatrix.[idx1, idx2])
 
             for i in [0..this.radius-1] do
                 let envA = (Set.toList atomEnvs.[idx1]).[i]
@@ -52,7 +52,7 @@ type MAP4Calculator(?dimensions:int, ?radius:int, ?isCounted:bool, ?returnString
 
     member this.calculate(mol) =
         let shingles = this.allPairs(mol, this.getAtomEnvs(mol))
-        Unfolded (this.encoder.fromMolecularShingling shingles)
+        Unfolded (this.encoder.fromMolecularShingles shingles)
         
     member this.calculateMany(mols:RWMol list) =
         Array.Parallel.map this.calculate (List.toArray mols)
@@ -63,8 +63,8 @@ type MAP4Calculator(?dimensions:int, ?radius:int, ?isCounted:bool, ?returnString
     member this.distance(fpA: FP, fpB: FP) =
         let dist =
             match fpA, fpB with
-            | Folded a, Folded b -> MHFP.distance a b
-            | Unfolded a, Unfolded b -> MHFP.distance a b
+            | Folded a, Folded b -> distance a b
+            | Unfolded a, Unfolded b -> distance a b
             | _, _ -> raise(ArgumentException("both arguments must be folded or unfolded fingerprints"))
         dist 
 

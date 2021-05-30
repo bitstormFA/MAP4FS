@@ -65,15 +65,15 @@ module Utils =
     /// This is a simpler version compared to the RDKit implementation always using the edge weight 1.0 
     let distanceMatrix (mol:RWMol) =  // Floyd Warshall
         let numAtoms = int(mol.getNumAtoms())
-        let dist = Array2D.create numAtoms numAtoms infinity
+        let dist = Array2D.create numAtoms numAtoms 10000000
         let numBonds = int(mol.getNumBonds())
 
         for i in [0..numBonds-1] do
             let bond = mol.getBondWithIdx(uint32(i))
             let fst = int(bond.getBeginAtomIdx())
             let snd = int(bond.getEndAtomIdx())
-            dist.[fst,snd] <- 1.0
-            dist.[snd,fst] <- 1.0
+            dist.[fst,snd] <- 1
+            dist.[snd,fst] <- 1
             
         let next = Array2D.create numAtoms numAtoms 0
         
@@ -84,7 +84,7 @@ module Utils =
                         dist.[i,j] <- dist.[i,k] + dist.[k,j]
                         next.[i,j] <- next.[i,k]
         for i in [0..numAtoms-1] do
-            dist.[i,i] <- 0.0
+            dist.[i,i] <- 0
         dist       
         
     type MaybeBuilder() =

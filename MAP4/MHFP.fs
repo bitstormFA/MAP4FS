@@ -110,8 +110,8 @@ let shinglesFromSmiles (smiles: Smiles) (radius: int) (rings: bool) (minRadius: 
 let shinglesFromSmilesDefaults smiles =
     shinglesFromSmiles smiles 3 true 1 true
 
-let hash (shingling: string list) =
-    let hashValues = shingling |> List.map (stringToHash 4)
+let hash (shingles: string list) =
+    let hashValues = shingles |> List.map (stringToHash 4)
     np.array (List.toArray hashValues, dtype = np.UInt32)
 
 let fold (length: int) (hashValues: ndarray) =
@@ -193,7 +193,7 @@ type MHFP(?permutations, ?seed) =
         np.zeros (shape this.permutations, dtype = np.UInt64)
 
 
-    member this.fromMolecularShingling(tokens: Smiles list) =
+    member this.fromMolecularShingles(tokens: Smiles list) =
         let mutable hashValues =
             np.full (shape (this.permutations, 1), this.maxHash, np.UInt32)
 
@@ -213,6 +213,6 @@ type MHFP(?permutations, ?seed) =
     member this.encode(smiles: Smiles) =
         maybe {
             let! tokens = shinglesFromSmiles smiles 3 true 1 true
-            let hash = this.fromMolecularShingling (tokens)
+            let hash = this.fromMolecularShingles (tokens)
             return hash
         }
