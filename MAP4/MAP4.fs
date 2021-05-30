@@ -15,7 +15,7 @@ type MAP4Calculator(?dimensions:int, ?radius:int, ?isCounted:bool, ?returnString
     
     member private this.getAtomEnvs(mol:RWMol) =
         let ids = atomsSeq mol |> Seq.map (fun at -> int(at.getIdx()))
-        let envs = ids |> Seq.map (MHFP.singleAtomIdxEnvironmentShingle mol this.radius)
+        let envs = ids |> Seq.map (singleAtomIdxEnvironmentShingle mol this.radius)
         Seq.zip ids envs |> Map.ofSeq
     
     member private this.allPairs(mol:RWMol, atomEnvs:Map<int,Set<string>>) =
@@ -42,19 +42,16 @@ type MAP4Calculator(?dimensions:int, ?radius:int, ?isCounted:bool, ?returnString
                 atomPairs.Add shingle
         Set.toList(Set.ofArray(atomPairs.ToArray()))
         
-    member private this.calculateInternal(mol:RWMol) =
-        this.allPairs(mol, this.getAtomEnvs(mol))
-        
     member private this.fold(pairs) =
-        let fpHash = MHFP.hash pairs
-        Folded (MHFP.fold this.dimensions fpHash)
+        let fpHash = hash pairs
+        Folded (fold this.dimensions fpHash)
         
     member this.calculateFolded(mol) =
-        let atomEnvPairs = this.calculateInternal mol
+        let atomEnvPairs = this.allPairs(mol, this.getAtomEnvs(mol))
         this.fold atomEnvPairs
 
     member this.calculate(mol) =
-        let shingles = this.calculateInternal mol
+        let shingles = this.allPairs(mol, this.getAtomEnvs(mol))
         Unfolded (this.encoder.fromMolecularShingling shingles)
         
     member this.calculateMany(mols:RWMol list) =

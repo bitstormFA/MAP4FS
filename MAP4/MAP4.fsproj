@@ -8,6 +8,7 @@
         <Compile Include="Utils.fs" />
         <Compile Include="MHFP.fs" />
         <Compile Include="MAP4.fs" />
+        <Compile Include="LSHForest.fs" />
     </ItemGroup>
 
     <ItemGroup>
