@@ -5,6 +5,7 @@ open GraphMolWrap
 open MAP4
 open MAP4.MHFP
 open Utils
+open System.Linq
 
 type MAP4Calculator(?dimensions:int, ?radius:int, ?isCounted:bool, ?returnString:bool) =
     member _.dimensions = defaultArg dimensions 1024
@@ -40,7 +41,7 @@ type MAP4Calculator(?dimensions:int, ?radius:int, ?isCounted:bool, ?returnString
                     shingleDict.[shingle] <- shingleDict.[shingle] + 1 
                     shingle <- $"|{shingleDict.[shingle]}"
                 atomPairs.Add shingle
-        Set.toList(Set.ofArray(atomPairs.ToArray()))
+        List.ofSeq(atomPairs.Distinct())
         
     member private this.fold(pairs) =
         let fpHash = hash pairs

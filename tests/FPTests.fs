@@ -113,7 +113,7 @@ let TestMAP4() =
     let distBA = map4.distance(map4B,map4A)
     let distFoldedAB = map4.distance(map4AF, map4BF)
     let distFoldedBA = map4.distance(map4BF, map4AF)
-    Assert.AreEqual(distAB, 0.7919921875)
+    Assert.AreEqual(distAB, 0.7919921875) // this number is slightly different from the python implementation
     Assert.AreEqual(distFoldedAB, 0.0166015625)
     Assert.AreEqual(distAB, distBA, 0.001)
     Assert.AreEqual(distFoldedAB, distFoldedBA)
