@@ -11,6 +11,9 @@ module Utils =
     type FP =
     | Folded of ndarray
     | Unfolded of ndarray
+        member this.getValue() = match this with
+                                       | Folded a -> a
+                                       | Unfolded a -> a
 
     let sha1 = HashAlgorithm.Create("SHA1")
 

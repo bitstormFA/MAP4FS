@@ -121,8 +121,12 @@ let TestMAP4() =
     
 [<Test>]
 let TestLSHForest() =
+    let map4 = MAP4.MAP4Calculator()
     let lf = LSHForest()
-    
+    let smilesA ="c1ccccc1"
+    let molA = RWMol.MolFromSmiles(smilesA)
+    let map4A = map4.calculate molA
+    lf.add(0, map4A.getValue())
     Assert.IsTrue(true)
 
     
