@@ -127,6 +127,7 @@ let TestLSHForest() =
     let molA = RWMol.MolFromSmiles(smilesA)
     let map4A = map4.calculate molA
     lf.add(0, map4A.getValue())
+    lf.index()
     Assert.IsTrue(true)
 
     
