@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
@@ -12,8 +12,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="NumpyDotNet" Version="0.9.74" />
-      <PackageReference Include="RDKitDotNetCore" Version="2021.5.0-master.alpha0" />
+      <PackageReference Include="NumpyDotNet" Version="0.9.82.1" />
+      <PackageReference Include="RDKitDotNetCore" Version="2022.10.20-master.alpha0" />
     </ItemGroup>
 
 </Project>
