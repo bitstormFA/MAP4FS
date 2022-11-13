@@ -41,7 +41,24 @@ type LSHForest(?dims: int, ?nPrefixTrees) =
             let b = np.array(a)
             hastablesSorted.[i] <- b.Sort()
         this.clean <- true
-            
+        
+    member this.binarySearch(n: int, hashtableSorted: ndarray, prefix: byte[], lenPrefix: int) =
+        let mutable i = 0
+        let mutable j = n
+        while i < j do
+            let h = int(i + (j - i) / 2)
+            if ((hashtableSorted.[h] :?>ndarray).[Slice(lenPrefix)] :?> byte[]) >= prefix then
+                i <- h + 1
+            else
+                j <- h
+        
+        
+    member private this.internalQuery(mhfp: ndarray, r: int) =
+        let prefixes = [ for start, _ in hashRanges do yield this.swap(mhfp.[Slice(start,start+r)] :?> ndarray) ]
+        let lenPrefixes = prefixes.[0].Length
+        1
+
+        
         
         
 
